@@ -1,0 +1,476 @@
+﻿
+@using Demo123.Models.Domain;
+@model Demo123.DTO.PracticeDto;
+
+
+
+@{
+}
+<h1>PRACTICE WITH LINQ</h1>
+<h4>Câu 1:</h4>
+<h5> List full details of all suppliers (5 rows)</h5>
+<p style="color:red">
+    var result = new PracticeDto();<br />
+    result.Result2 = await mvcDemoDbContext.Supplier.ToListAsync();<br />
+    return View(result);
+    <table>
+        <thead>
+        </thead>
+        <tbody>
+
+            @foreach (var supplier in Model.Result2)
+            {
+                <tr>
+
+                    <td>@supplier.sno</td>
+                    <td>@supplier.sname</td>
+                    <td>@supplier.status</td>
+                    <td>@supplier.city</td>
+                 
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</p>
+
+<p>
+
+</p>
+
+<h4>Câu 2:</h4>
+<h5>List full details of all jobs (7 rows)</h5>
+<p style="color:red">
+    result.Result1 = await mvcDemoDbContext.Job.ToListAsync();
+</p>
+
+
+<table>
+    <thead>
+
+    </thead>
+    <tbody>
+       
+        @foreach (var job in Model.Result1)
+        {
+            <tr>
+               
+                <td>@job.jno</td>
+                <td>@job.jname</td>
+                <td>@job.city</td>
+            
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Câu 3:</h4>
+<h5>List full details of all parts (6 rows)</h5>
+<p style="color:red">
+    result.Result3 = await mvcDemoDbContext.Part.ToListAsync();
+</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var part in Model.Result3)
+        {
+            <tr>
+
+                <td>@part.pno>
+                <td>@part.pname</td>
+                <td>@part.color</td>
+                <td>@part.weight</td>
+                <td>@part.city</td>
+                <td>@part.price</td>
+             
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<h4>Câu 4:</h4>
+<h5> List full details of all red parts (3 rows)</h5>
+<p style="color:red"> result.Result4 = await mvcDemoDbContext.Part.Where(x => x.color.Equals("red")).ToListAsync();</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var part in Model.Result4)
+        {
+            <tr>
+
+                <td>@part.pname</td>
+           
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Câu 5:</h4>
+<h5> List all part names (6 rows)</h5>
+<p style="color:red"></p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var part in Model.Result3)
+        {
+            <tr>
+
+                <td>@part.pname</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Câu 6:</h4>
+<h5> List all part names of green parts (1 rows)</h5>
+<p style="color:red"> result.Result6 = await mvcDemoDbContext.Part.Where(x => x.color.Equals("green")).ToListAsync();</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var part in Model.Result6)
+        {
+            <tr>
+
+                <td>@part.pname</td>
+             
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Câu 7:</h4>
+
+<h5>List the cities in which jobs are located (5 rows)</h5>
+<p style="color:red">  result.Result7 = await mvcDemoDbContext.Job.ToListAsync();</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var job in Model.Result7)
+        {
+            <tr>
+
+                <td>@job.city</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Câu 8:</h4>
+<h5>List job names for all jobs in Paris (1 rows)</h5>
+<p style="color:red"> result.Result8 = await mvcDemoDbContext.Job.Where(x => x.city.Equals("Paris")).ToListAsync();</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var job in Model.Result8)
+        {
+            <tr>
+
+                <td>@job.jname</td>
+             
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Câu 9:</h4>
+<h5>List supplier numbers for suppliers who supply job J1 (3 rows)</h5>
+<p style="color:red"> result.Result9 = await mvcDemoDbContext.Spj.Where(x => x.jno.Equals("J1")).ToListAsync();</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var spj in Model.Result9)
+        {
+            <tr>
+
+                <td>@spj.sno</td>
+             
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Câu 10:</h4>
+<h5>List supplier numbers for suppliers who supply job J3 with part P6 (1 rows)</h5>
+<p style="color:red">result.Result10 = await mvcDemoDbContext.Spj.Where(x => x.jno.Equals("J3") && x.pno.Equals("P6")).ToListAsync()</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var spj in Model.Result10)
+        {
+            <tr>
+
+                <td>@spj.sno</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Câu 11:</h4>
+<h5> List part numbers and names for parts weighing 17 or more units (3 rows)</h5>
+<p style="color:red"> result.Result11 = await mvcDemoDbContext.Part.Where(x => x.weight>=17).ToListAsync();</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var part in Model.Result11)
+        {
+            <tr>
+
+                <td>@part.pno</td>
+                <td>@part.pname</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Câu 12:</h4>
+<h5>List job names for jobs which are not located in Paris or London (4 rows)</h5>
+<p style="color:red">  result.Result12 = await mvcDemoDbContext.Job.Where(x => x.city!=("Paris")&& x.city!=("London")).ToListAsync();</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var job in Model.Result12)
+        {
+            <tr>
+
+                <td>@job.jname</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Câu 13:</h4>
+<h5>For each row in spj, list the part names and their respective quantities (24 rows)</h5>
+<p style="color:red">
+    result.Result13 = await (from item in mvcDemoDbContext.Spj<br />
+    join part in mvcDemoDbContext.Part<br />
+    on item.pno equals part.pno<br />
+    select new viewModel<br />
+    {<br />
+    pname = part.pname,<br />
+    qty = item.qty<br />
+    }).ToListAsync();<br />
+</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Result13)
+        {
+            <tr>
+
+                <td>@item.pname</td>
+                <td>@item.qty</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Câu 14:</h4>
+<h5>List all pairs of city values such that a supplier in the first city supplies a job in the second (24 rows)</h5>
+<p style="color:red">
+    result.Result14 = await (from sup in mvcDemoDbContext.Suppiler<br />
+    join spj in mvcDemoDbContext.Spj<br />
+    on sup.sno equals spj.sno<br />
+    join jobs in mvcDemoDbContext.Job<br />
+    on spj.jno equals jobs.jno<br />
+    select new viewModel14<br />
+    {<br />
+    city = jobs.city,<br />
+    job= sup.city,<br />
+
+    }).ToListAsync();<br />
+</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Result14)
+        {
+            <tr>
+
+                <td>@item.city</td>
+                <td>@item.job</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Câu 15:</h4>
+<h5>List all (city, pno, city) triples such that a supplier in the first city supplies the specified part to a job in the second (24 rows)</h5>
+<p style="color:red">
+    result.Result15 = await (from spj in mvcDemoDbContext.Spj<br />
+    join sup in mvcDemoDbContext.Suppiler<br />
+    on spj.sno equals sup.sno<br />
+    join part in mvcDemoDbContext.Part<br />
+    on spj.pno equals part.pno<br />
+    join job in mvcDemoDbContext.Job<br />
+    on spj.jno equals job.jno<br />
+    select new viewModel15<br />
+    {<br />
+    job = sup.city,<br />
+
+    pno = part.pno,<br />
+    city = job.city<br />
+
+
+    }).ToListAsync();<br />
+</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Result15)
+        {
+            <tr>
+
+                <td>@item.job</td>
+                <td>@item.pno</td>
+                <td>@item.city</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<h4>Câu 16:</h4>
+<h5> List all pairs of supplier numbers for suppliers that are located in the same city (2 rows)</h5>
+<p style="color:red">
+    result.Result16 = await (from a in mvcDemoDbContext.Suppiler<br />
+    from b in mvcDemoDbContext.Suppiler<br />
+    where a.city == b.city &&<br />
+    a.sno.CompareTo(b.sno) <0 <br />
+    select new viewModel16 { sno=a.sno, sno1=b.sno }).ToListAsync();<br />
+</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Result16)
+        {
+            <tr>
+
+                <td>@item.sno1</td>
+                <td>@item.sno</td>
+              
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Câu 20:</h4>
+<h5>List the job names for jobs supplied by supplier S1 (2 rows)</h5>
+<p style="color:red">
+    result.Result20 = await (from a in mvcDemoDbContext.Spj<br />
+    join b in mvcDemoDbContext.Job<br />
+    on a.jno equals b.jno<br />
+    where a.sno.Equals("S1")<br />
+    select new viewModel20<br />
+    {<br />
+    jname = b.jname<br />
+    }).ToListAsync();<br />
+
+</p>
+
+<table>
+    <thead>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Result20)
+        {
+            <tr>
+
+                <td>@item.jname</td>
+             
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Câu 26:</h4>
+<h5>List part names beginning with 'C' (2 rows)</h5>
+<p style="color:red">
+    result.Result26 = await mvcDemoDbContext.Part.Where(x => x.pname.StartsWith("C")).ToListAsync();
+</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+        @foreach (var part in Model.Result26)
+        {
+            <tr>
+
+                <td>@part.pname</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+@*<h4>Câu 27:</h4>
+<h5>List supplier names with the third letter 'a' (3 rows)</h5>
+<p style="color:red">
+    result.Result27 = await mvcDemoDbContext.Part.Where(x => x.pname.StartsWith("__a")).ToListAsync();
+</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+        @foreach (var s in Model.Result27)
+        {
+                <tr>
+
+                    <td>@s.sname</td>
+
+                </tr>
+        }
+    </tbody>
+</table>*@
+<h4>Câu 35:</h4>
+<h5>List part names and weights in order heaviest to lightest (6 rows)</h5>
+<p style="color:red">
+    
+    result.Result35 = await (from a in mvcDemoDbContext.Part<br />
+    orderby a.weight descending<br />
+    select a).ToListAsync();<br />
+</p>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+        @foreach (var s in Model.Result35)
+        {
+            <tr>
+
+                <td>@s.pname</td>
+                <td>@s.weight</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
